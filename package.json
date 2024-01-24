@@ -10,7 +10,7 @@
     "watch:sass": "sass --watch src/scss:dist/css --style expanded",
     "watch:server": "browser-sync start -s --startPath dist/index.html -w -f \"dist/**/*.html, dist/**/*.css, dist/img/**\"",
     "watch:css": "npx postcss dist/css/**/*.css -u autoprefixer -d dist/css --base dist/css -w",
-    "watch:sharp": "onchange 'src/images/**/*.{png,jpg,jpeg}' -- node avif-webp-converter {{changed}}",
+    "watch:sharp": "onchange 'src/images/**/*.{png,jpg,jpeg}' -- node sharp-watch.mjs {{changed}}",
     "watch": "npm-run-all -p watch:*",
     "start": "npm-run-all -p watch"
   },
