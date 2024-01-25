@@ -1,6 +1,11 @@
 import fs from 'fs';
 import path from 'path';
 import sharp from 'sharp';
+// import * as glob from 'glob'; 
+
+
+// function processFiles(files) {
+//   files.forEach(file => {
 
 let dirName = path.dirname(process.argv[2]);
 let fileName = path.basename(process.argv[2]);
@@ -18,10 +23,19 @@ const fileFormat = getExtension(fileName);
 if (!fs.existsSync('dist/images')) {
   fs.mkdirSync('dist/images');
 }
+// もしディレクトリがなければ作成
+// if (!fs.existsSync('dist/images')) {
+//   fs.mkdirSync('dist/images',{ recursive: true });
+// }
+
 // サブディレクトリがなければ作成
 if (!fs.existsSync(outPutDir)) {
   fs.mkdirSync(outPutDir);
 }
+// サブディレクトリがなければ作成
+// if (!fs.existsSync(outPutDir)) {
+//   fs.mkdirSync(outPutDir,{ recursive: true });
+// }
 
 let sh = sharp(`${dirName}/${fileName}`);
 let webp = sharp(`${dirName}/${fileName}`);
@@ -95,3 +109,19 @@ sh.toFile(`${outPutDir}/${fileName}`, (err, info) => {
     );
   }
 });
+
+// });
+// }
+
+
+// コマンドライン引数によって挙動を変更
+if (process.argv[2] === '--process-all') {
+  // 'src/images'ディレクトリ内の全画像ファイルを検索
+  const files = glob.sync('src/images/**/*.{png,jpg,jpeg,gif,svg}');
+  processFiles(files);
+} else {
+  // 既存の挙動を維持
+  let dirName = path.dirname(process.argv[2]);
+  let fileName = path.basename(process.argv[2]);
+  processFiles([`${dirName}/${fileName}`]);
+}
