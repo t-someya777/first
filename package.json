@@ -12,6 +12,7 @@
     "watch:css": "npx postcss dist/css/**/*.css -u autoprefixer -d dist/css --base dist/css -w",
     "watch:image": "node avif-webp-converter.js {{changed}}",
     "watch:sharp": "onchange 'src/images/**/*.{png,jpg,jpeg}' -- node avif-webp-converter.js {{changed}}",
+    "watch:webpack": " npx webpack",
     "watch": "npm-run-all -p watch:*",
     "clean": "rimraf dist",
     "start": "npm run clean && npm-run-all -p watch"
@@ -28,8 +29,12 @@
   },
   "homepage": "https://github.com/t-someya777/first#readme",
   "devDependencies": {
+    "@babel/core": "^7.23.9",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.23.9",
     "ansi-colors": "^4.1.3",
     "autoprefixer": "^10.4.16",
+    "babel-loader": "^9.1.3",
     "browser-sync": "^2.29.3",
     "fancy-log": "^2.0.0",
     "glob": "^10.3.10",
@@ -46,6 +51,7 @@
     "pug-cli": "^1.0.0-alpha6",
     "rimraf": "^5.0.5",
     "sass": "^1.69.5",
-    "sharp": "^0.33.2"
+    "sharp": "^0.33.2",
+    "webpack-cli": "^5.1.4"
   }
 }
